@@ -60,23 +60,60 @@ func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
 					intVal := int32(val)
 					field.Set(reflect.ValueOf(&intVal))
 				}
+			case reflect.Bool:
+				boolVal := jsValue.ToBoolean()
+				field.Set(reflect.ValueOf(&boolVal))
 			}
 		case reflect.Slice:
 			elemType := fieldType.Type.Elem()
-			if elemType.Kind() == reflect.Struct {
-				jsArray := jsValue.ToObject(rt)
-				length := int(jsArray.Get("length").ToInteger())
-				slice := reflect.MakeSlice(fieldType.Type, length, length)
-				for j := 0; j < length; j++ {
-					jsElem := jsArray.Get(strconv.Itoa(j))
-					elem := reflect.New(elemType).Elem()
+			jsArray := jsValue.ToObject(rt)
+			length := jsArray.Get("length").ToInteger()
+			slice := reflect.MakeSlice(fieldType.Type, int(length), int(length))
+
+			for j := 0; j < int(length); j++ {
+				jsElem := jsArray.Get(strconv.Itoa(j))
+				elem := reflect.New(elemType).Elem()
+
+				switch elemType.Kind() {
+				case reflect.Ptr:
+					innerElemType := elemType.Elem()
+					switch innerElemType.Kind() {
+					case reflect.Struct:
+						if err := fromGojaObject(rt, jsElem.ToObject(rt), elem.Addr().Interface()); err != nil {
+							return err
+						}
+					case reflect.String:
+						str := jsElem.String()
+						elem.Set(reflect.ValueOf(&str))
+					case reflect.Int32:
+						if val, err := strconv.ParseInt(jsElem.String(), 10, 32); err == nil {
+							intVal := int32(val)
+							elem.Set(reflect.ValueOf(&intVal))
+						}
+					case reflect.Bool:
+						boolVal := jsElem.ToBoolean()
+						elem.Set(reflect.ValueOf(&boolVal))
+					}
+				case reflect.Struct:
 					if err := fromGojaObject(rt, jsElem.ToObject(rt), elem.Addr().Interface()); err != nil {
 						return err
 					}
-					slice.Index(j).Set(elem)
+				case reflect.String:
+					elem.SetString(jsElem.String())
+				case reflect.Int, reflect.Int32, reflect.Int64:
+					if val, err := strconv.ParseInt(jsElem.String(), 10, elemType.Bits()); err == nil {
+						elem.SetInt(val)
+					}
+				case reflect.Float32, reflect.Float64:
+					if val, err := strconv.ParseFloat(jsElem.String(), elemType.Bits()); err == nil {
+						elem.SetFloat(val)
+					}
+				case reflect.Bool:
+					elem.SetBool(jsElem.ToBoolean())
 				}
-				field.Set(slice)
+				slice.Index(j).Set(elem)
 			}
+			field.Set(slice)
 		case reflect.Struct:
 			// Direct conversion for specific struct types, possibly using custom converters
 			if err := fromGojaObject(rt, jsValue.ToObject(rt), field.Addr().Interface()); err != nil {
@@ -92,6 +129,8 @@ func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
 			if val, err := strconv.ParseFloat(jsValue.String(), field.Type().Bits()); err == nil {
 				field.SetFloat(val)
 			}
+		case reflect.Bool:
+			field.SetBool(jsValue.ToBoolean())
 		}
 	}
 
