@@ -14,27 +14,24 @@ export const options = {
 
 export default function () {
 	const {buckets} = listBuckets();
-	console.log(buckets);
 	check(buckets, {
 			'it must return two buckets': (buckets) => buckets.length === 2,
-			'bucket1 must be in the list': (buckets) => buckets[0].name.normalize() === "bucket1",
-			'bucket2 must be in the list': (buckets) => buckets[1].name.normalize() === "bucket2"
+			'bucket1 must be in the list': (buckets) => buckets.some(b => b.name.normalize() === "bucket1"),
+			'bucket2 must be in the list': (buckets) => buckets.some(b => b.name.normalize() === "bucket1")
 		}
 	);
 
 	const {contents: b1Objects} = listObjects({bucket: "bucket1"})
-	console.log(b1Objects);
 	check(b1Objects, {
 			'it must return one object': (b1Objects) => b1Objects.length === 1,
-			'file1.txt must be in the list': (b1Objects) => b1Objects[0].key.normalize() === "file1.txt",
+			'file1.txt must be in the list': (b1Objects) => b1Objects.some(obj => obj.key.normalize() === "file1.txt")
 		}
 	);
 
 	const {contents: b2Objects} = listObjects({bucket: "bucket2"})
-	console.log(b2Objects);
 	check(b2Objects, {
 			'it must return one object': (b2Objects) => b2Objects.length === 1,
-			'file2.txt must be in the list': (b2Objects) => b2Objects[0].key.normalize() === "file2.txt",
+		'file1.txt must be in the list': (b2Objects) => b2Objects.some(obj => obj.key.normalize() === "file2.txt")
 		}
 	);
 }
