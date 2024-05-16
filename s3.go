@@ -31,7 +31,7 @@ func (a *AWS) {{ .Name }}({{ .FunctionCall }}) goja.Value {
 	}
 
 	in := &{{.InputType}}{}
-	if err := fromGojaObject(obj, in); err != nil {
+	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 

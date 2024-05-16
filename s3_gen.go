@@ -16,7 +16,7 @@ func (a *AWS) ListBuckets(obj *goja.Object,) goja.Value {
 	}
 
 	in := &s3.ListBucketsInput{}
-	if err := fromGojaObject(obj, in); err != nil {
+	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -37,7 +37,7 @@ func (a *AWS) ListObjects(obj *goja.Object,) goja.Value {
 	}
 
 	in := &s3.ListObjectsInput{}
-	if err := fromGojaObject(obj, in); err != nil {
+	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
