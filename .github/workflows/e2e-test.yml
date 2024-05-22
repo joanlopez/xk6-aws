@@ -39,3 +39,4 @@ jobs:
       - name: Run k6 test
         run: |
           ./k6 run examples/s3.js
+          ./k6 run examples/eventbridge.js

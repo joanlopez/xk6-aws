@@ -12,6 +12,10 @@ import (
 
 // Populates the given struct [to] from a *goja.Object.
 func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
+	if obj == nil || goja.IsUndefined(obj) || goja.IsNull(obj) {
+		return nil
+	}
+
 	// Validate that 'to' is a pointer to a struct
 	rv := reflect.ValueOf(to)
 	if rv.Kind() != reflect.Ptr || rv.Elem().Kind() != reflect.Struct {
