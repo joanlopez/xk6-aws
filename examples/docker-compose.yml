@@ -7,7 +7,7 @@ services:
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=s3,events
+      - SERVICES=s3,events,kinesis
       - DEFAULT_REGION=us-east-1
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"

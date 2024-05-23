@@ -40,3 +40,4 @@ jobs:
         run: |
           ./k6 run examples/s3.js
           ./k6 run examples/eventbridge.js
+          ./k6 run examples/kinesis.js

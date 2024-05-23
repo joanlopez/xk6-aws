@@ -1,12 +1,12 @@
 import {check} from 'k6';
 import {listBuckets, listObjects} from "k6/x/aws";
 
-// Set your k6 run configuration
+// Set your k6 run configuration:
 // https://k6.io/docs/using-k6/k6-options
 export const options = {
 	iterations: 1,
 
-	// Demonstrative k6 thresholds
+	// Demonstrative k6 thresholds.
 	thresholds: {
 		checks: [{threshold: 'rate == 1.00', abortOnFail: true}],
 	},

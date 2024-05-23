@@ -9,19 +9,19 @@ import {
 	removeTargets,
 } from 'k6/x/aws';
 
-// Set your k6 run configuration
+// Set your k6 run configuration:
 // https://k6.io/docs/using-k6/k6-options
 export const options = {
 	iterations: 1,
 
-	// Demonstrative k6 thresholds
+	// Demonstrative k6 thresholds.
 	thresholds: {
 		checks: [{threshold: 'rate == 1.00', abortOnFail: true}],
 	},
 };
 
 export default function () {
-	// Create an event bus
+	// Create an event bus.
 	const eventBusName = 'test-event-bus';
 	const {event_bus_arn} = createEventBus({name: eventBusName});
 	check(event_bus_arn, {
@@ -37,7 +37,7 @@ export default function () {
 		'test-event-bus must be in the list': (buses) => buses.some(b => b.name.normalize() === eventBusName),
 	});
 
-	// Put an event onto the event bus
+	// Put an event onto the event bus.
 	const eventDetail = JSON.stringify({key1: 'value1'});
 	const putResponse = putEvents({
 		entries: [
@@ -50,12 +50,12 @@ export default function () {
 		],
 	});
 
-	// Check that the event was successfully put
+	// Check that the event was successfully put.
 	check(putResponse, {
 		'put events must succeed': (res) => res.failed_entry_count === 0,
 	});
 
-	// Create a rule
+	// Create a rule.
 	const ruleName = 'test-rule';
 	const {rule_arn} = putRule({
 		name: ruleName,
@@ -69,7 +69,7 @@ export default function () {
 		'rule creation must succeed': (arn) => arn.includes(`rule/${eventBusName}/${ruleName}`),
 	});
 
-	// Put a target for the rule
+	// Put a target for the rule.
 	const targetId = 'test-target';
 	const targetArn = 'arn:aws:lambda:us-east-1:123456789012:function:test-function';
 	const putTargetsResponse = putTargets({
@@ -87,7 +87,7 @@ export default function () {
 		'put targets must succeed': (res) => res.failed_entry_count === 0,
 	});
 
-	// Remove the target
+	// Remove the target.
 	const removeTargetsResponse = removeTargets({
 		rule: ruleName,
 		event_bus_name: eventBusName,
@@ -98,6 +98,6 @@ export default function () {
 		'remove targets must succeed': (res) => res.failed_entry_count === 0,
 	});
 
-	// Delete the event bus (idempotent)
+	// Delete the event bus (idempotent).
 	deleteEventBus({name: eventBusName});
 }
