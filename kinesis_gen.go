@@ -8,612 +8,470 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
 
+type KinesisClient struct {
+	*AWS
+	sdk *kinesis.Client
+}
 
-func (a *AWS) AddTagsToStream(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
+func (a *AWS) newKinesisClient(call goja.ConstructorCall) *goja.Object {
+	awsCfg := a.constructorCallToConfig("KinesisClient", call)
+
+	sdk := kinesis.NewFromConfig(awsCfg)
+
+	client := &KinesisClient{
+		AWS: a,
+		sdk: sdk,
 	}
 
+	return a.vu.Runtime().ToValue(client).ToObject(a.vu.Runtime())
+}
+
+
+func (c *KinesisClient) AddTagsToStream(obj *goja.Object,) goja.Value {
 	in := &kinesis.AddTagsToStreamInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).AddTagsToStream(context.Background(), in, )
+	out, err := c.sdk.AddTagsToStream(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CreateStream(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) CreateStream(obj *goja.Object,) goja.Value {
 	in := &kinesis.CreateStreamInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).CreateStream(context.Background(), in, )
+	out, err := c.sdk.CreateStream(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DecreaseStreamRetentionPeriod(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DecreaseStreamRetentionPeriod(obj *goja.Object,) goja.Value {
 	in := &kinesis.DecreaseStreamRetentionPeriodInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DecreaseStreamRetentionPeriod(context.Background(), in, )
+	out, err := c.sdk.DecreaseStreamRetentionPeriod(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteResourcePolicy(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DeleteResourcePolicy(obj *goja.Object,) goja.Value {
 	in := &kinesis.DeleteResourcePolicyInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DeleteResourcePolicy(context.Background(), in, )
+	out, err := c.sdk.DeleteResourcePolicy(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteStream(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DeleteStream(obj *goja.Object,) goja.Value {
 	in := &kinesis.DeleteStreamInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DeleteStream(context.Background(), in, )
+	out, err := c.sdk.DeleteStream(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeregisterStreamConsumer(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DeregisterStreamConsumer(obj *goja.Object,) goja.Value {
 	in := &kinesis.DeregisterStreamConsumerInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DeregisterStreamConsumer(context.Background(), in, )
+	out, err := c.sdk.DeregisterStreamConsumer(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeLimits(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DescribeLimits(obj *goja.Object,) goja.Value {
 	in := &kinesis.DescribeLimitsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DescribeLimits(context.Background(), in, )
+	out, err := c.sdk.DescribeLimits(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeStream(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DescribeStream(obj *goja.Object,) goja.Value {
 	in := &kinesis.DescribeStreamInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DescribeStream(context.Background(), in, )
+	out, err := c.sdk.DescribeStream(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeStreamConsumer(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DescribeStreamConsumer(obj *goja.Object,) goja.Value {
 	in := &kinesis.DescribeStreamConsumerInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DescribeStreamConsumer(context.Background(), in, )
+	out, err := c.sdk.DescribeStreamConsumer(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeStreamSummary(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DescribeStreamSummary(obj *goja.Object,) goja.Value {
 	in := &kinesis.DescribeStreamSummaryInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DescribeStreamSummary(context.Background(), in, )
+	out, err := c.sdk.DescribeStreamSummary(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DisableEnhancedMonitoring(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) DisableEnhancedMonitoring(obj *goja.Object,) goja.Value {
 	in := &kinesis.DisableEnhancedMonitoringInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).DisableEnhancedMonitoring(context.Background(), in, )
+	out, err := c.sdk.DisableEnhancedMonitoring(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) EnableEnhancedMonitoring(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) EnableEnhancedMonitoring(obj *goja.Object,) goja.Value {
 	in := &kinesis.EnableEnhancedMonitoringInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).EnableEnhancedMonitoring(context.Background(), in, )
+	out, err := c.sdk.EnableEnhancedMonitoring(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) GetRecords(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) GetRecords(obj *goja.Object,) goja.Value {
 	in := &kinesis.GetRecordsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).GetRecords(context.Background(), in, )
+	out, err := c.sdk.GetRecords(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) GetResourcePolicy(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) GetResourcePolicy(obj *goja.Object,) goja.Value {
 	in := &kinesis.GetResourcePolicyInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).GetResourcePolicy(context.Background(), in, )
+	out, err := c.sdk.GetResourcePolicy(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) GetShardIterator(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) GetShardIterator(obj *goja.Object,) goja.Value {
 	in := &kinesis.GetShardIteratorInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).GetShardIterator(context.Background(), in, )
+	out, err := c.sdk.GetShardIterator(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) IncreaseStreamRetentionPeriod(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) IncreaseStreamRetentionPeriod(obj *goja.Object,) goja.Value {
 	in := &kinesis.IncreaseStreamRetentionPeriodInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).IncreaseStreamRetentionPeriod(context.Background(), in, )
+	out, err := c.sdk.IncreaseStreamRetentionPeriod(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListShards(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) ListShards(obj *goja.Object,) goja.Value {
 	in := &kinesis.ListShardsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).ListShards(context.Background(), in, )
+	out, err := c.sdk.ListShards(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListStreamConsumers(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) ListStreamConsumers(obj *goja.Object,) goja.Value {
 	in := &kinesis.ListStreamConsumersInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).ListStreamConsumers(context.Background(), in, )
+	out, err := c.sdk.ListStreamConsumers(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListStreams(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) ListStreams(obj *goja.Object,) goja.Value {
 	in := &kinesis.ListStreamsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).ListStreams(context.Background(), in, )
+	out, err := c.sdk.ListStreams(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListTagsForStream(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) ListTagsForStream(obj *goja.Object,) goja.Value {
 	in := &kinesis.ListTagsForStreamInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).ListTagsForStream(context.Background(), in, )
+	out, err := c.sdk.ListTagsForStream(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) MergeShards(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) MergeShards(obj *goja.Object,) goja.Value {
 	in := &kinesis.MergeShardsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).MergeShards(context.Background(), in, )
+	out, err := c.sdk.MergeShards(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutRecord(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) PutRecord(obj *goja.Object,) goja.Value {
 	in := &kinesis.PutRecordInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).PutRecord(context.Background(), in, )
+	out, err := c.sdk.PutRecord(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutRecords(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) PutRecords(obj *goja.Object,) goja.Value {
 	in := &kinesis.PutRecordsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).PutRecords(context.Background(), in, )
+	out, err := c.sdk.PutRecords(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutResourcePolicy(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) PutResourcePolicy(obj *goja.Object,) goja.Value {
 	in := &kinesis.PutResourcePolicyInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).PutResourcePolicy(context.Background(), in, )
+	out, err := c.sdk.PutResourcePolicy(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) RegisterStreamConsumer(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) RegisterStreamConsumer(obj *goja.Object,) goja.Value {
 	in := &kinesis.RegisterStreamConsumerInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).RegisterStreamConsumer(context.Background(), in, )
+	out, err := c.sdk.RegisterStreamConsumer(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) RemoveTagsFromStream(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) RemoveTagsFromStream(obj *goja.Object,) goja.Value {
 	in := &kinesis.RemoveTagsFromStreamInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).RemoveTagsFromStream(context.Background(), in, )
+	out, err := c.sdk.RemoveTagsFromStream(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) SplitShard(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) SplitShard(obj *goja.Object,) goja.Value {
 	in := &kinesis.SplitShardInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).SplitShard(context.Background(), in, )
+	out, err := c.sdk.SplitShard(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) StartStreamEncryption(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) StartStreamEncryption(obj *goja.Object,) goja.Value {
 	in := &kinesis.StartStreamEncryptionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).StartStreamEncryption(context.Background(), in, )
+	out, err := c.sdk.StartStreamEncryption(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) StopStreamEncryption(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) StopStreamEncryption(obj *goja.Object,) goja.Value {
 	in := &kinesis.StopStreamEncryptionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).StopStreamEncryption(context.Background(), in, )
+	out, err := c.sdk.StopStreamEncryption(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) SubscribeToShard(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) SubscribeToShard(obj *goja.Object,) goja.Value {
 	in := &kinesis.SubscribeToShardInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).SubscribeToShard(context.Background(), in, )
+	out, err := c.sdk.SubscribeToShard(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UpdateShardCount(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) UpdateShardCount(obj *goja.Object,) goja.Value {
 	in := &kinesis.UpdateShardCountInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).UpdateShardCount(context.Background(), in, )
+	out, err := c.sdk.UpdateShardCount(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UpdateStreamMode(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) UpdateStreamMode(obj *goja.Object,) goja.Value {
 	in := &kinesis.UpdateStreamModeInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).UpdateStreamMode(context.Background(), in, )
+	out, err := c.sdk.UpdateStreamMode(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 

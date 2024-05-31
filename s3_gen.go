@@ -8,46 +8,52 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-
-func (a *AWS) ListBuckets(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
-	in := &s3.ListBucketsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
-		panic(err)
-	}
-
-	out, err := s3.NewFromConfig(cfg, func(o *s3.Options) {
-        o.UsePathStyle = true  // Ensure path-style is used
-    }).ListBuckets(context.Background(), in, )
-    if err != nil {
-		panic(err)
-	}
-
-	return a.vu.Runtime().ToValue(out)
+type S3Client struct {
+	*AWS
+	sdk *s3.Client
 }
 
-func (a *AWS) ListObjects(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
+func (a *AWS) newS3Client(call goja.ConstructorCall) *goja.Object {
+	awsCfg := a.constructorCallToConfig("S3Client", call)
+
+	sdk := s3.NewFromConfig(awsCfg, func(o *s3.Options) {
+		o.UsePathStyle = true // Ensure path-style is used
+	})
+
+	client := &S3Client{
+		AWS: a,
+		sdk: sdk,
+	}
+
+	return a.vu.Runtime().ToValue(client).ToObject(a.vu.Runtime())
+}
+
+
+func (c *S3Client) ListBuckets(obj *goja.Object,) goja.Value {
+	in := &s3.ListBucketsInput{}
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	in := &s3.ListObjectsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
-		panic(err)
-	}
-
-	out, err := s3.NewFromConfig(cfg, func(o *s3.Options) {
-        o.UsePathStyle = true  // Ensure path-style is used
-    }).ListObjects(context.Background(), in, )
+	out, err := c.sdk.ListBuckets(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
+}
+
+func (c *S3Client) ListObjects(obj *goja.Object,) goja.Value {
+	in := &s3.ListObjectsInput{}
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+		panic(err)
+	}
+
+	out, err := c.sdk.ListObjects(context.Background(), in, )
+    if err != nil {
+		panic(err)
+	}
+
+	return c.vu.Runtime().ToValue(out)
 }
 

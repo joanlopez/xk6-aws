@@ -156,3 +156,8 @@ func pascalToSnake(s string) string {
 	}
 	return snakeCase.String()
 }
+
+// isObject determines whether the given [goja.Value] is a [goja.Object] or not.
+func isObject(val goja.Value) bool {
+	return val != nil && val.ExportType() != nil && val.ExportType().Kind() == reflect.Map
+}

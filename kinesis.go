@@ -23,24 +23,37 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
 
+type KinesisClient struct {
+	*AWS
+	sdk *kinesis.Client
+}
+
+func (a *AWS) newKinesisClient(call goja.ConstructorCall) *goja.Object {
+	awsCfg := a.constructorCallToConfig("KinesisClient", call)
+
+	sdk := kinesis.NewFromConfig(awsCfg)
+
+	client := &KinesisClient{
+		AWS: a,
+		sdk: sdk,
+	}
+
+	return a.vu.Runtime().ToValue(client).ToObject(a.vu.Runtime())
+}
+
 {{ range . }}
-func (a *AWS) {{ .Name }}({{ .FunctionCall }}) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *KinesisClient) {{ .Name }}({{ .FunctionCall }}) goja.Value {
 	in := &{{.InputType}}{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := kinesis.NewFromConfig(cfg).{{ .InnerFunctionCall }}
+	out, err := c.sdk.{{ .InnerFunctionCall }}
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 {{ end }}
 `

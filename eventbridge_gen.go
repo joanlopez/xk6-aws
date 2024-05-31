@@ -8,1087 +8,820 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 )
 
+type EventBridgeClient struct {
+	*AWS
+	sdk *eventbridge.Client
+}
 
-func (a *AWS) ActivateEventSource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
+func (a *AWS) newEventBridgeClient(call goja.ConstructorCall) *goja.Object {
+	awsCfg := a.constructorCallToConfig("EventBridgeClient", call)
+
+	sdk := eventbridge.NewFromConfig(awsCfg)
+
+	client := &EventBridgeClient{
+		AWS: a,
+		sdk: sdk,
 	}
 
+	return a.vu.Runtime().ToValue(client).ToObject(a.vu.Runtime())
+}
+
+
+func (c *EventBridgeClient) ActivateEventSource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ActivateEventSourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ActivateEventSource(context.Background(), in, )
+	out, err := c.sdk.ActivateEventSource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CancelReplay(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) CancelReplay(obj *goja.Object,) goja.Value {
 	in := &eventbridge.CancelReplayInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).CancelReplay(context.Background(), in, )
+	out, err := c.sdk.CancelReplay(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CreateApiDestination(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) CreateApiDestination(obj *goja.Object,) goja.Value {
 	in := &eventbridge.CreateApiDestinationInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).CreateApiDestination(context.Background(), in, )
+	out, err := c.sdk.CreateApiDestination(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CreateArchive(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) CreateArchive(obj *goja.Object,) goja.Value {
 	in := &eventbridge.CreateArchiveInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).CreateArchive(context.Background(), in, )
+	out, err := c.sdk.CreateArchive(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CreateConnection(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) CreateConnection(obj *goja.Object,) goja.Value {
 	in := &eventbridge.CreateConnectionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).CreateConnection(context.Background(), in, )
+	out, err := c.sdk.CreateConnection(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CreateEndpoint(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) CreateEndpoint(obj *goja.Object,) goja.Value {
 	in := &eventbridge.CreateEndpointInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).CreateEndpoint(context.Background(), in, )
+	out, err := c.sdk.CreateEndpoint(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CreateEventBus(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) CreateEventBus(obj *goja.Object,) goja.Value {
 	in := &eventbridge.CreateEventBusInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).CreateEventBus(context.Background(), in, )
+	out, err := c.sdk.CreateEventBus(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) CreatePartnerEventSource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) CreatePartnerEventSource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.CreatePartnerEventSourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).CreatePartnerEventSource(context.Background(), in, )
+	out, err := c.sdk.CreatePartnerEventSource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeactivateEventSource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeactivateEventSource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeactivateEventSourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeactivateEventSource(context.Background(), in, )
+	out, err := c.sdk.DeactivateEventSource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeauthorizeConnection(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeauthorizeConnection(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeauthorizeConnectionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeauthorizeConnection(context.Background(), in, )
+	out, err := c.sdk.DeauthorizeConnection(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteApiDestination(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeleteApiDestination(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeleteApiDestinationInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeleteApiDestination(context.Background(), in, )
+	out, err := c.sdk.DeleteApiDestination(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteArchive(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeleteArchive(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeleteArchiveInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeleteArchive(context.Background(), in, )
+	out, err := c.sdk.DeleteArchive(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteConnection(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeleteConnection(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeleteConnectionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeleteConnection(context.Background(), in, )
+	out, err := c.sdk.DeleteConnection(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteEndpoint(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeleteEndpoint(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeleteEndpointInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeleteEndpoint(context.Background(), in, )
+	out, err := c.sdk.DeleteEndpoint(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteEventBus(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeleteEventBus(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeleteEventBusInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeleteEventBus(context.Background(), in, )
+	out, err := c.sdk.DeleteEventBus(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeletePartnerEventSource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeletePartnerEventSource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeletePartnerEventSourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeletePartnerEventSource(context.Background(), in, )
+	out, err := c.sdk.DeletePartnerEventSource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DeleteRule(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DeleteRule(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DeleteRuleInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DeleteRule(context.Background(), in, )
+	out, err := c.sdk.DeleteRule(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeApiDestination(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeApiDestination(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeApiDestinationInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeApiDestination(context.Background(), in, )
+	out, err := c.sdk.DescribeApiDestination(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeArchive(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeArchive(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeArchiveInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeArchive(context.Background(), in, )
+	out, err := c.sdk.DescribeArchive(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeConnection(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeConnection(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeConnectionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeConnection(context.Background(), in, )
+	out, err := c.sdk.DescribeConnection(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeEndpoint(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeEndpoint(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeEndpointInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeEndpoint(context.Background(), in, )
+	out, err := c.sdk.DescribeEndpoint(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeEventBus(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeEventBus(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeEventBusInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeEventBus(context.Background(), in, )
+	out, err := c.sdk.DescribeEventBus(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeEventSource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeEventSource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeEventSourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeEventSource(context.Background(), in, )
+	out, err := c.sdk.DescribeEventSource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribePartnerEventSource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribePartnerEventSource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribePartnerEventSourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribePartnerEventSource(context.Background(), in, )
+	out, err := c.sdk.DescribePartnerEventSource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeReplay(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeReplay(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeReplayInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeReplay(context.Background(), in, )
+	out, err := c.sdk.DescribeReplay(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DescribeRule(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DescribeRule(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DescribeRuleInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DescribeRule(context.Background(), in, )
+	out, err := c.sdk.DescribeRule(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) DisableRule(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) DisableRule(obj *goja.Object,) goja.Value {
 	in := &eventbridge.DisableRuleInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).DisableRule(context.Background(), in, )
+	out, err := c.sdk.DisableRule(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) EnableRule(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) EnableRule(obj *goja.Object,) goja.Value {
 	in := &eventbridge.EnableRuleInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).EnableRule(context.Background(), in, )
+	out, err := c.sdk.EnableRule(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListApiDestinations(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListApiDestinations(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListApiDestinationsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListApiDestinations(context.Background(), in, )
+	out, err := c.sdk.ListApiDestinations(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListArchives(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListArchives(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListArchivesInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListArchives(context.Background(), in, )
+	out, err := c.sdk.ListArchives(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListConnections(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListConnections(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListConnectionsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListConnections(context.Background(), in, )
+	out, err := c.sdk.ListConnections(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListEndpoints(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListEndpoints(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListEndpointsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListEndpoints(context.Background(), in, )
+	out, err := c.sdk.ListEndpoints(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListEventBuses(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListEventBuses(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListEventBusesInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListEventBuses(context.Background(), in, )
+	out, err := c.sdk.ListEventBuses(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListEventSources(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListEventSources(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListEventSourcesInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListEventSources(context.Background(), in, )
+	out, err := c.sdk.ListEventSources(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListPartnerEventSourceAccounts(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListPartnerEventSourceAccounts(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListPartnerEventSourceAccountsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListPartnerEventSourceAccounts(context.Background(), in, )
+	out, err := c.sdk.ListPartnerEventSourceAccounts(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListPartnerEventSources(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListPartnerEventSources(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListPartnerEventSourcesInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListPartnerEventSources(context.Background(), in, )
+	out, err := c.sdk.ListPartnerEventSources(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListReplays(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListReplays(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListReplaysInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListReplays(context.Background(), in, )
+	out, err := c.sdk.ListReplays(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListRuleNamesByTarget(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListRuleNamesByTarget(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListRuleNamesByTargetInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListRuleNamesByTarget(context.Background(), in, )
+	out, err := c.sdk.ListRuleNamesByTarget(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListRules(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListRules(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListRulesInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListRules(context.Background(), in, )
+	out, err := c.sdk.ListRules(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListTagsForResource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListTagsForResource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListTagsForResourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListTagsForResource(context.Background(), in, )
+	out, err := c.sdk.ListTagsForResource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) ListTargetsByRule(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) ListTargetsByRule(obj *goja.Object,) goja.Value {
 	in := &eventbridge.ListTargetsByRuleInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).ListTargetsByRule(context.Background(), in, )
+	out, err := c.sdk.ListTargetsByRule(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutEvents(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) PutEvents(obj *goja.Object,) goja.Value {
 	in := &eventbridge.PutEventsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).PutEvents(context.Background(), in, )
+	out, err := c.sdk.PutEvents(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutPartnerEvents(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) PutPartnerEvents(obj *goja.Object,) goja.Value {
 	in := &eventbridge.PutPartnerEventsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).PutPartnerEvents(context.Background(), in, )
+	out, err := c.sdk.PutPartnerEvents(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutPermission(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) PutPermission(obj *goja.Object,) goja.Value {
 	in := &eventbridge.PutPermissionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).PutPermission(context.Background(), in, )
+	out, err := c.sdk.PutPermission(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutRule(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) PutRule(obj *goja.Object,) goja.Value {
 	in := &eventbridge.PutRuleInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).PutRule(context.Background(), in, )
+	out, err := c.sdk.PutRule(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) PutTargets(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) PutTargets(obj *goja.Object,) goja.Value {
 	in := &eventbridge.PutTargetsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).PutTargets(context.Background(), in, )
+	out, err := c.sdk.PutTargets(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) RemovePermission(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) RemovePermission(obj *goja.Object,) goja.Value {
 	in := &eventbridge.RemovePermissionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).RemovePermission(context.Background(), in, )
+	out, err := c.sdk.RemovePermission(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) RemoveTargets(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) RemoveTargets(obj *goja.Object,) goja.Value {
 	in := &eventbridge.RemoveTargetsInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).RemoveTargets(context.Background(), in, )
+	out, err := c.sdk.RemoveTargets(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) StartReplay(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) StartReplay(obj *goja.Object,) goja.Value {
 	in := &eventbridge.StartReplayInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).StartReplay(context.Background(), in, )
+	out, err := c.sdk.StartReplay(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) TagResource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) TagResource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.TagResourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).TagResource(context.Background(), in, )
+	out, err := c.sdk.TagResource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) TestEventPattern(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) TestEventPattern(obj *goja.Object,) goja.Value {
 	in := &eventbridge.TestEventPatternInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).TestEventPattern(context.Background(), in, )
+	out, err := c.sdk.TestEventPattern(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UntagResource(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) UntagResource(obj *goja.Object,) goja.Value {
 	in := &eventbridge.UntagResourceInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).UntagResource(context.Background(), in, )
+	out, err := c.sdk.UntagResource(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UpdateApiDestination(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) UpdateApiDestination(obj *goja.Object,) goja.Value {
 	in := &eventbridge.UpdateApiDestinationInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).UpdateApiDestination(context.Background(), in, )
+	out, err := c.sdk.UpdateApiDestination(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UpdateArchive(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) UpdateArchive(obj *goja.Object,) goja.Value {
 	in := &eventbridge.UpdateArchiveInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).UpdateArchive(context.Background(), in, )
+	out, err := c.sdk.UpdateArchive(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UpdateConnection(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) UpdateConnection(obj *goja.Object,) goja.Value {
 	in := &eventbridge.UpdateConnectionInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).UpdateConnection(context.Background(), in, )
+	out, err := c.sdk.UpdateConnection(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UpdateEndpoint(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) UpdateEndpoint(obj *goja.Object,) goja.Value {
 	in := &eventbridge.UpdateEndpointInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).UpdateEndpoint(context.Background(), in, )
+	out, err := c.sdk.UpdateEndpoint(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 
-func (a *AWS) UpdateEventBus(obj *goja.Object,) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *EventBridgeClient) UpdateEventBus(obj *goja.Object,) goja.Value {
 	in := &eventbridge.UpdateEventBusInput{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := eventbridge.NewFromConfig(cfg).UpdateEventBus(context.Background(), in, )
+	out, err := c.sdk.UpdateEventBus(context.Background(), in, )
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 

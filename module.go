@@ -53,5 +53,11 @@ type AWS struct {
 func (mi *ModuleInstance) Exports() modules.Exports {
 	return modules.Exports{
 		Default: mi.aws,
+		Named: map[string]interface{}{
+			"AWSConfig":         mi.aws.newConfig,
+			"S3Client":          mi.aws.newS3Client,
+			"KinesisClient":     mi.aws.newKinesisClient,
+			"EventBridgeClient": mi.aws.newEventBridgeClient,
+		},
 	}
 }

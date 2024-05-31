@@ -23,26 +23,39 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
+type S3Client struct {
+	*AWS
+	sdk *s3.Client
+}
+
+func (a *AWS) newS3Client(call goja.ConstructorCall) *goja.Object {
+	awsCfg := a.constructorCallToConfig("S3Client", call)
+
+	sdk := s3.NewFromConfig(awsCfg, func(o *s3.Options) {
+		o.UsePathStyle = true // Ensure path-style is used
+	})
+
+	client := &S3Client{
+		AWS: a,
+		sdk: sdk,
+	}
+
+	return a.vu.Runtime().ToValue(client).ToObject(a.vu.Runtime())
+}
+
 {{ range . }}
-func (a *AWS) {{ .Name }}({{ .FunctionCall }}) goja.Value {
-	cfg, err := defaultConfig(context.TODO())
-	if err != nil {
-		panic(err)
-	}
-
+func (c *S3Client) {{ .Name }}({{ .FunctionCall }}) goja.Value {
 	in := &{{.InputType}}{}
-	if err := fromGojaObject(a.vu.Runtime(), obj, in); err != nil {
+	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
-	out, err := s3.NewFromConfig(cfg, func(o *s3.Options) {
-        o.UsePathStyle = true  // Ensure path-style is used
-    }).{{ .InnerFunctionCall }}
+	out, err := c.sdk.{{ .InnerFunctionCall }}
     if err != nil {
 		panic(err)
 	}
 
-	return a.vu.Runtime().ToValue(out)
+	return c.vu.Runtime().ToValue(out)
 }
 {{ end }}
 `

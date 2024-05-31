@@ -1,13 +1,6 @@
 import {check, sleep} from 'k6';
-import {
-	createStream,
-	deleteStream,
-	describeStream,
-	listStreams,
-	putRecords,
-	getRecords,
-	getShardIterator,
-} from 'k6/x/aws';
+import {KinesisClient} from "k6/x/aws";
+import {config} from './localstack.js';
 
 // Set your k6 run configuration:
 // https://k6.io/docs/using-k6/k6-options
@@ -21,13 +14,15 @@ export const options = {
 };
 
 export default function () {
+	const kinesis = new KinesisClient(config);
+
 	// Create a Kinesis stream.
 	const streamName = 'test-stream';
 	const shardCount = 1;
-	createStream({stream_name: streamName, shard_count: shardCount});
+	kinesis.createStream({stream_name: streamName, shard_count: shardCount});
 
 	// List Kinesis streams to confirm creation. It must return at least the stream we created.
-	const {stream_names} = listStreams();
+	const {stream_names} = kinesis.listStreams();
 	check(stream_names, {
 		'stream must be in the list': (stream_names) => stream_names.includes(streamName),
 	});
@@ -35,7 +30,7 @@ export default function () {
 	// Wait for the stream to become ACTIVE.
 	let streamStatus = 'CREATING';
 	while (streamStatus !== 'ACTIVE') {
-		const {stream_description} = describeStream({stream_name: streamName});
+		const {stream_description} = kinesis.describeStream({stream_name: streamName});
 		// Trim to remove leading/trailing whitespace.
 		streamStatus = stream_description.stream_status.trim();
 		if (streamStatus !== 'ACTIVE') {
@@ -46,7 +41,7 @@ export default function () {
 	// Put records onto the Kinesis stream.
 	const partitionKey = 'partitionKey';
 	const data = 'test-data';
-	const putRecordsResponse = putRecords({
+	const putRecordsResponse = kinesis.putRecords({
 		stream_name: streamName,
 		records: [
 			{
@@ -63,7 +58,7 @@ export default function () {
 	});
 
 	// Get shard iterator.
-	const {shard_iterator} = getShardIterator({
+	const {shard_iterator} = kinesis.getShardIterator({
 		stream_name: streamName,
 		shard_id: 'shardId-000000000000',
 		shard_iterator_type: 'TRIM_HORIZON',
@@ -74,7 +69,7 @@ export default function () {
 	});
 
 	// Get records from the stream.
-	const {records} = getRecords({
+	const {records} = kinesis.getRecords({
 		shard_iterator: shard_iterator,
 	});
 
@@ -84,5 +79,5 @@ export default function () {
 	});
 
 	// Delete the Kinesis stream.
-	deleteStream({stream_name: streamName});
+	kinesis.deleteStream({stream_name: streamName});
 }

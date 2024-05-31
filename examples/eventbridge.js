@@ -1,13 +1,6 @@
 import {check} from 'k6';
-import {
-	createEventBus,
-	deleteEventBus,
-	listEventBuses,
-	putEvents,
-	putRule,
-	putTargets,
-	removeTargets,
-} from 'k6/x/aws';
+import {EventBridgeClient} from "k6/x/aws";
+import {config} from './localstack.js';
 
 // Set your k6 run configuration:
 // https://k6.io/docs/using-k6/k6-options
@@ -21,9 +14,11 @@ export const options = {
 };
 
 export default function () {
+	const eb = new EventBridgeClient(config);
+
 	// Create an event bus.
 	const eventBusName = 'test-event-bus';
-	const {event_bus_arn} = createEventBus({name: eventBusName});
+	const {event_bus_arn} = eb.createEventBus({name: eventBusName});
 	check(event_bus_arn, {
 		'event bus creation must succeed': (event_bus_arn) => event_bus_arn.includes(`event-bus/${eventBusName}`),
 	});
@@ -31,7 +26,7 @@ export default function () {
 	// List event buses to confirm creation. It must return two event buses:
 	// - the default event bus
 	// - the one we created
-	const {event_buses} = listEventBuses();
+	const {event_buses} = eb.listEventBuses();
 	check(event_buses, {
 		'it must return two event buses': (buses) => buses.length === 2,
 		'test-event-bus must be in the list': (buses) => buses.some(b => b.name.normalize() === eventBusName),
@@ -39,7 +34,7 @@ export default function () {
 
 	// Put an event onto the event bus.
 	const eventDetail = JSON.stringify({key1: 'value1'});
-	const putResponse = putEvents({
+	const putResponse = eb.putEvents({
 		entries: [
 			{
 				event_bus_name: eventBusName,
@@ -57,7 +52,7 @@ export default function () {
 
 	// Create a rule.
 	const ruleName = 'test-rule';
-	const {rule_arn} = putRule({
+	const {rule_arn} = eb.putRule({
 		name: ruleName,
 		event_bus_name: eventBusName,
 		event_pattern: JSON.stringify({
@@ -72,7 +67,7 @@ export default function () {
 	// Put a target for the rule.
 	const targetId = 'test-target';
 	const targetArn = 'arn:aws:lambda:us-east-1:123456789012:function:test-function';
-	const putTargetsResponse = putTargets({
+	const putTargetsResponse = eb.putTargets({
 		rule: ruleName,
 		event_bus_name: eventBusName,
 		targets: [
@@ -88,7 +83,7 @@ export default function () {
 	});
 
 	// Remove the target.
-	const removeTargetsResponse = removeTargets({
+	const removeTargetsResponse = eb.removeTargets({
 		rule: ruleName,
 		event_bus_name: eventBusName,
 		ids: [targetId],
@@ -99,5 +94,5 @@ export default function () {
 	});
 
 	// Delete the event bus (idempotent).
-	deleteEventBus({name: eventBusName});
+	eb.deleteEventBus({name: eventBusName});
 }
