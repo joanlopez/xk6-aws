@@ -4,7 +4,7 @@ package aws
 import (
 	"context"
 
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
 
@@ -13,7 +13,7 @@ type KinesisClient struct {
 	sdk *kinesis.Client
 }
 
-func (a *AWS) newKinesisClient(call goja.ConstructorCall) *goja.Object {
+func (a *AWS) newKinesisClient(call sobek.ConstructorCall) *sobek.Object {
 	awsCfg := a.constructorCallToConfig("KinesisClient", call)
 
 	sdk := kinesis.NewFromConfig(awsCfg)
@@ -27,9 +27,9 @@ func (a *AWS) newKinesisClient(call goja.ConstructorCall) *goja.Object {
 }
 
 
-func (c *KinesisClient) AddTagsToStream(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) AddTagsToStream(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.AddTagsToStreamInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -41,9 +41,9 @@ func (c *KinesisClient) AddTagsToStream(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) CreateStream(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) CreateStream(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.CreateStreamInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -55,9 +55,9 @@ func (c *KinesisClient) CreateStream(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DecreaseStreamRetentionPeriod(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DecreaseStreamRetentionPeriod(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DecreaseStreamRetentionPeriodInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -69,9 +69,9 @@ func (c *KinesisClient) DecreaseStreamRetentionPeriod(obj *goja.Object,) goja.Va
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DeleteResourcePolicy(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DeleteResourcePolicy(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DeleteResourcePolicyInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -83,9 +83,9 @@ func (c *KinesisClient) DeleteResourcePolicy(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DeleteStream(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DeleteStream(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DeleteStreamInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -97,9 +97,9 @@ func (c *KinesisClient) DeleteStream(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DeregisterStreamConsumer(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DeregisterStreamConsumer(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DeregisterStreamConsumerInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -111,9 +111,9 @@ func (c *KinesisClient) DeregisterStreamConsumer(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DescribeLimits(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DescribeLimits(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DescribeLimitsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -125,9 +125,9 @@ func (c *KinesisClient) DescribeLimits(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DescribeStream(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DescribeStream(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DescribeStreamInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -139,9 +139,9 @@ func (c *KinesisClient) DescribeStream(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DescribeStreamConsumer(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DescribeStreamConsumer(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DescribeStreamConsumerInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -153,9 +153,9 @@ func (c *KinesisClient) DescribeStreamConsumer(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DescribeStreamSummary(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DescribeStreamSummary(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DescribeStreamSummaryInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -167,9 +167,9 @@ func (c *KinesisClient) DescribeStreamSummary(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) DisableEnhancedMonitoring(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) DisableEnhancedMonitoring(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.DisableEnhancedMonitoringInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -181,9 +181,9 @@ func (c *KinesisClient) DisableEnhancedMonitoring(obj *goja.Object,) goja.Value 
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) EnableEnhancedMonitoring(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) EnableEnhancedMonitoring(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.EnableEnhancedMonitoringInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -195,9 +195,9 @@ func (c *KinesisClient) EnableEnhancedMonitoring(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) GetRecords(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) GetRecords(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.GetRecordsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -209,9 +209,9 @@ func (c *KinesisClient) GetRecords(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) GetResourcePolicy(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) GetResourcePolicy(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.GetResourcePolicyInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -223,9 +223,9 @@ func (c *KinesisClient) GetResourcePolicy(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) GetShardIterator(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) GetShardIterator(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.GetShardIteratorInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -237,9 +237,9 @@ func (c *KinesisClient) GetShardIterator(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) IncreaseStreamRetentionPeriod(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) IncreaseStreamRetentionPeriod(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.IncreaseStreamRetentionPeriodInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -251,9 +251,9 @@ func (c *KinesisClient) IncreaseStreamRetentionPeriod(obj *goja.Object,) goja.Va
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) ListShards(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) ListShards(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.ListShardsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -265,9 +265,9 @@ func (c *KinesisClient) ListShards(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) ListStreamConsumers(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) ListStreamConsumers(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.ListStreamConsumersInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -279,9 +279,9 @@ func (c *KinesisClient) ListStreamConsumers(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) ListStreams(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) ListStreams(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.ListStreamsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -293,9 +293,9 @@ func (c *KinesisClient) ListStreams(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) ListTagsForStream(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) ListTagsForStream(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.ListTagsForStreamInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -307,9 +307,9 @@ func (c *KinesisClient) ListTagsForStream(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) MergeShards(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) MergeShards(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.MergeShardsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -321,9 +321,9 @@ func (c *KinesisClient) MergeShards(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) PutRecord(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) PutRecord(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.PutRecordInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -335,9 +335,9 @@ func (c *KinesisClient) PutRecord(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) PutRecords(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) PutRecords(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.PutRecordsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -349,9 +349,9 @@ func (c *KinesisClient) PutRecords(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) PutResourcePolicy(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) PutResourcePolicy(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.PutResourcePolicyInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -363,9 +363,9 @@ func (c *KinesisClient) PutResourcePolicy(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) RegisterStreamConsumer(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) RegisterStreamConsumer(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.RegisterStreamConsumerInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -377,9 +377,9 @@ func (c *KinesisClient) RegisterStreamConsumer(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) RemoveTagsFromStream(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) RemoveTagsFromStream(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.RemoveTagsFromStreamInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -391,9 +391,9 @@ func (c *KinesisClient) RemoveTagsFromStream(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) SplitShard(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) SplitShard(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.SplitShardInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -405,9 +405,9 @@ func (c *KinesisClient) SplitShard(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) StartStreamEncryption(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) StartStreamEncryption(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.StartStreamEncryptionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -419,9 +419,9 @@ func (c *KinesisClient) StartStreamEncryption(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) StopStreamEncryption(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) StopStreamEncryption(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.StopStreamEncryptionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -433,9 +433,9 @@ func (c *KinesisClient) StopStreamEncryption(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) SubscribeToShard(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) SubscribeToShard(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.SubscribeToShardInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -447,9 +447,9 @@ func (c *KinesisClient) SubscribeToShard(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) UpdateShardCount(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) UpdateShardCount(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.UpdateShardCountInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -461,9 +461,9 @@ func (c *KinesisClient) UpdateShardCount(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *KinesisClient) UpdateStreamMode(obj *goja.Object,) goja.Value {
+func (c *KinesisClient) UpdateStreamMode(obj *sobek.Object,) sobek.Value {
 	in := &kinesis.UpdateStreamModeInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 

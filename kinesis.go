@@ -19,7 +19,7 @@ package aws
 import (
 	"context"
 
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
 
@@ -28,7 +28,7 @@ type KinesisClient struct {
 	sdk *kinesis.Client
 }
 
-func (a *AWS) newKinesisClient(call goja.ConstructorCall) *goja.Object {
+func (a *AWS) newKinesisClient(call sobek.ConstructorCall) *sobek.Object {
 	awsCfg := a.constructorCallToConfig("KinesisClient", call)
 
 	sdk := kinesis.NewFromConfig(awsCfg)
@@ -42,9 +42,9 @@ func (a *AWS) newKinesisClient(call goja.ConstructorCall) *goja.Object {
 }
 
 {{ range . }}
-func (c *KinesisClient) {{ .Name }}({{ .FunctionCall }}) goja.Value {
+func (c *KinesisClient) {{ .Name }}({{ .FunctionCall }}) sobek.Value {
 	in := &{{.InputType}}{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -128,7 +128,7 @@ func main() {
 				// explicitly skip variadic parameters
 			// Pointer to
 			case p.Kind() == reflect.Ptr:
-				functionCall += "obj *goja.Object,"
+				functionCall += "obj *sobek.Object,"
 				inputType = strings.ReplaceAll(p.String(), "*", "")
 				innerFunctionCall += "in, "
 			}

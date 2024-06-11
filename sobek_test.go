@@ -1,15 +1,16 @@
 package aws
 
 import (
+	"testing"
+
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 	"github.com/stretchr/testify/require"
-	"testing"
 
 	"go.k6.io/k6/js/modulestest"
 )
 
-func Test_fromGojaObject(t *testing.T) {
+func Test_fromSobekObject(t *testing.T) {
 	rt := modulestest.NewRuntime(t)
 
 	t.Run("NestedStructs(eventbridge.CreateConnectionInput)", func(t *testing.T) {
@@ -37,7 +38,7 @@ func Test_fromGojaObject(t *testing.T) {
 		root.Set(pascalToSnake("AuthorizationType"), "BASIC")
 
 		in := &eventbridge.CreateConnectionInput{}
-		require.NoError(t, fromGojaObject(rt.VU.Runtime(), root, in))
+		require.NoError(t, fromSobekObject(rt.VU.Runtime(), root, in))
 
 		require.Equal(t, "randomApiKeyName", *in.AuthParameters.ApiKeyAuthParameters.ApiKeyName)
 		require.Equal(t, "randomKey", *in.AuthParameters.InvocationHttpParameters.BodyParameters[0].Key)

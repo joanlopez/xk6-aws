@@ -4,7 +4,7 @@ package aws
 import (
 	"context"
 
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 )
 
@@ -13,7 +13,7 @@ type EventBridgeClient struct {
 	sdk *eventbridge.Client
 }
 
-func (a *AWS) newEventBridgeClient(call goja.ConstructorCall) *goja.Object {
+func (a *AWS) newEventBridgeClient(call sobek.ConstructorCall) *sobek.Object {
 	awsCfg := a.constructorCallToConfig("EventBridgeClient", call)
 
 	sdk := eventbridge.NewFromConfig(awsCfg)
@@ -27,9 +27,9 @@ func (a *AWS) newEventBridgeClient(call goja.ConstructorCall) *goja.Object {
 }
 
 
-func (c *EventBridgeClient) ActivateEventSource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ActivateEventSource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ActivateEventSourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -41,9 +41,9 @@ func (c *EventBridgeClient) ActivateEventSource(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) CancelReplay(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) CancelReplay(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.CancelReplayInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -55,9 +55,9 @@ func (c *EventBridgeClient) CancelReplay(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) CreateApiDestination(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) CreateApiDestination(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.CreateApiDestinationInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -69,9 +69,9 @@ func (c *EventBridgeClient) CreateApiDestination(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) CreateArchive(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) CreateArchive(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.CreateArchiveInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -83,9 +83,9 @@ func (c *EventBridgeClient) CreateArchive(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) CreateConnection(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) CreateConnection(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.CreateConnectionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -97,9 +97,9 @@ func (c *EventBridgeClient) CreateConnection(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) CreateEndpoint(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) CreateEndpoint(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.CreateEndpointInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -111,9 +111,9 @@ func (c *EventBridgeClient) CreateEndpoint(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) CreateEventBus(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) CreateEventBus(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.CreateEventBusInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -125,9 +125,9 @@ func (c *EventBridgeClient) CreateEventBus(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) CreatePartnerEventSource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) CreatePartnerEventSource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.CreatePartnerEventSourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -139,9 +139,9 @@ func (c *EventBridgeClient) CreatePartnerEventSource(obj *goja.Object,) goja.Val
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeactivateEventSource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeactivateEventSource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeactivateEventSourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -153,9 +153,9 @@ func (c *EventBridgeClient) DeactivateEventSource(obj *goja.Object,) goja.Value 
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeauthorizeConnection(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeauthorizeConnection(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeauthorizeConnectionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -167,9 +167,9 @@ func (c *EventBridgeClient) DeauthorizeConnection(obj *goja.Object,) goja.Value 
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeleteApiDestination(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeleteApiDestination(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeleteApiDestinationInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -181,9 +181,9 @@ func (c *EventBridgeClient) DeleteApiDestination(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeleteArchive(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeleteArchive(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeleteArchiveInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -195,9 +195,9 @@ func (c *EventBridgeClient) DeleteArchive(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeleteConnection(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeleteConnection(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeleteConnectionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -209,9 +209,9 @@ func (c *EventBridgeClient) DeleteConnection(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeleteEndpoint(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeleteEndpoint(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeleteEndpointInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -223,9 +223,9 @@ func (c *EventBridgeClient) DeleteEndpoint(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeleteEventBus(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeleteEventBus(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeleteEventBusInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -237,9 +237,9 @@ func (c *EventBridgeClient) DeleteEventBus(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeletePartnerEventSource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeletePartnerEventSource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeletePartnerEventSourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -251,9 +251,9 @@ func (c *EventBridgeClient) DeletePartnerEventSource(obj *goja.Object,) goja.Val
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DeleteRule(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DeleteRule(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DeleteRuleInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -265,9 +265,9 @@ func (c *EventBridgeClient) DeleteRule(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeApiDestination(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeApiDestination(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeApiDestinationInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -279,9 +279,9 @@ func (c *EventBridgeClient) DescribeApiDestination(obj *goja.Object,) goja.Value
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeArchive(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeArchive(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeArchiveInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -293,9 +293,9 @@ func (c *EventBridgeClient) DescribeArchive(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeConnection(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeConnection(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeConnectionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -307,9 +307,9 @@ func (c *EventBridgeClient) DescribeConnection(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeEndpoint(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeEndpoint(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeEndpointInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -321,9 +321,9 @@ func (c *EventBridgeClient) DescribeEndpoint(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeEventBus(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeEventBus(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeEventBusInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -335,9 +335,9 @@ func (c *EventBridgeClient) DescribeEventBus(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeEventSource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeEventSource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeEventSourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -349,9 +349,9 @@ func (c *EventBridgeClient) DescribeEventSource(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribePartnerEventSource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribePartnerEventSource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribePartnerEventSourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -363,9 +363,9 @@ func (c *EventBridgeClient) DescribePartnerEventSource(obj *goja.Object,) goja.V
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeReplay(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeReplay(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeReplayInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -377,9 +377,9 @@ func (c *EventBridgeClient) DescribeReplay(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DescribeRule(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DescribeRule(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DescribeRuleInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -391,9 +391,9 @@ func (c *EventBridgeClient) DescribeRule(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) DisableRule(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) DisableRule(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.DisableRuleInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -405,9 +405,9 @@ func (c *EventBridgeClient) DisableRule(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) EnableRule(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) EnableRule(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.EnableRuleInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -419,9 +419,9 @@ func (c *EventBridgeClient) EnableRule(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListApiDestinations(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListApiDestinations(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListApiDestinationsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -433,9 +433,9 @@ func (c *EventBridgeClient) ListApiDestinations(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListArchives(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListArchives(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListArchivesInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -447,9 +447,9 @@ func (c *EventBridgeClient) ListArchives(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListConnections(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListConnections(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListConnectionsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -461,9 +461,9 @@ func (c *EventBridgeClient) ListConnections(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListEndpoints(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListEndpoints(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListEndpointsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -475,9 +475,9 @@ func (c *EventBridgeClient) ListEndpoints(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListEventBuses(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListEventBuses(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListEventBusesInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -489,9 +489,9 @@ func (c *EventBridgeClient) ListEventBuses(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListEventSources(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListEventSources(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListEventSourcesInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -503,9 +503,9 @@ func (c *EventBridgeClient) ListEventSources(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListPartnerEventSourceAccounts(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListPartnerEventSourceAccounts(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListPartnerEventSourceAccountsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -517,9 +517,9 @@ func (c *EventBridgeClient) ListPartnerEventSourceAccounts(obj *goja.Object,) go
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListPartnerEventSources(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListPartnerEventSources(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListPartnerEventSourcesInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -531,9 +531,9 @@ func (c *EventBridgeClient) ListPartnerEventSources(obj *goja.Object,) goja.Valu
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListReplays(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListReplays(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListReplaysInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -545,9 +545,9 @@ func (c *EventBridgeClient) ListReplays(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListRuleNamesByTarget(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListRuleNamesByTarget(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListRuleNamesByTargetInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -559,9 +559,9 @@ func (c *EventBridgeClient) ListRuleNamesByTarget(obj *goja.Object,) goja.Value 
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListRules(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListRules(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListRulesInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -573,9 +573,9 @@ func (c *EventBridgeClient) ListRules(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListTagsForResource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListTagsForResource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListTagsForResourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -587,9 +587,9 @@ func (c *EventBridgeClient) ListTagsForResource(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) ListTargetsByRule(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) ListTargetsByRule(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.ListTargetsByRuleInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -601,9 +601,9 @@ func (c *EventBridgeClient) ListTargetsByRule(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) PutEvents(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) PutEvents(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.PutEventsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -615,9 +615,9 @@ func (c *EventBridgeClient) PutEvents(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) PutPartnerEvents(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) PutPartnerEvents(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.PutPartnerEventsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -629,9 +629,9 @@ func (c *EventBridgeClient) PutPartnerEvents(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) PutPermission(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) PutPermission(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.PutPermissionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -643,9 +643,9 @@ func (c *EventBridgeClient) PutPermission(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) PutRule(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) PutRule(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.PutRuleInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -657,9 +657,9 @@ func (c *EventBridgeClient) PutRule(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) PutTargets(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) PutTargets(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.PutTargetsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -671,9 +671,9 @@ func (c *EventBridgeClient) PutTargets(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) RemovePermission(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) RemovePermission(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.RemovePermissionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -685,9 +685,9 @@ func (c *EventBridgeClient) RemovePermission(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) RemoveTargets(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) RemoveTargets(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.RemoveTargetsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -699,9 +699,9 @@ func (c *EventBridgeClient) RemoveTargets(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) StartReplay(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) StartReplay(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.StartReplayInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -713,9 +713,9 @@ func (c *EventBridgeClient) StartReplay(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) TagResource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) TagResource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.TagResourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -727,9 +727,9 @@ func (c *EventBridgeClient) TagResource(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) TestEventPattern(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) TestEventPattern(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.TestEventPatternInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -741,9 +741,9 @@ func (c *EventBridgeClient) TestEventPattern(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) UntagResource(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) UntagResource(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.UntagResourceInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -755,9 +755,9 @@ func (c *EventBridgeClient) UntagResource(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) UpdateApiDestination(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) UpdateApiDestination(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.UpdateApiDestinationInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -769,9 +769,9 @@ func (c *EventBridgeClient) UpdateApiDestination(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) UpdateArchive(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) UpdateArchive(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.UpdateArchiveInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -783,9 +783,9 @@ func (c *EventBridgeClient) UpdateArchive(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) UpdateConnection(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) UpdateConnection(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.UpdateConnectionInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -797,9 +797,9 @@ func (c *EventBridgeClient) UpdateConnection(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) UpdateEndpoint(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) UpdateEndpoint(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.UpdateEndpointInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -811,9 +811,9 @@ func (c *EventBridgeClient) UpdateEndpoint(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *EventBridgeClient) UpdateEventBus(obj *goja.Object,) goja.Value {
+func (c *EventBridgeClient) UpdateEventBus(obj *sobek.Object,) sobek.Value {
 	in := &eventbridge.UpdateEventBusInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 

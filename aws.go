@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -26,7 +26,7 @@ type Endpoint struct {
 	SigningRegion string
 }
 
-func (a *AWS) newConfig(call goja.ConstructorCall) *goja.Object {
+func (a *AWS) newConfig(call sobek.ConstructorCall) *sobek.Object {
 	if len(call.Arguments) == 0 {
 		return a.vu.Runtime().ToValue(&Config{}).ToObject(a.vu.Runtime())
 	}
@@ -46,7 +46,7 @@ func (a *AWS) newConfig(call goja.ConstructorCall) *goja.Object {
 	return a.vu.Runtime().ToValue(cfg).ToObject(a.vu.Runtime())
 }
 
-func (a *AWS) constructorCallToConfig(id string, call goja.ConstructorCall) aws.Config {
+func (a *AWS) constructorCallToConfig(id string, call sobek.ConstructorCall) aws.Config {
 	rt := a.vu.Runtime()
 
 	// If no arguments are passed, we'll use the default config.

@@ -19,7 +19,7 @@ package aws
 import (
 	"context"
 
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -28,7 +28,7 @@ type S3Client struct {
 	sdk *s3.Client
 }
 
-func (a *AWS) newS3Client(call goja.ConstructorCall) *goja.Object {
+func (a *AWS) newS3Client(call sobek.ConstructorCall) *sobek.Object {
 	awsCfg := a.constructorCallToConfig("S3Client", call)
 
 	sdk := s3.NewFromConfig(awsCfg, func(o *s3.Options) {
@@ -44,9 +44,9 @@ func (a *AWS) newS3Client(call goja.ConstructorCall) *goja.Object {
 }
 
 {{ range . }}
-func (c *S3Client) {{ .Name }}({{ .FunctionCall }}) goja.Value {
+func (c *S3Client) {{ .Name }}({{ .FunctionCall }}) sobek.Value {
 	in := &{{.InputType}}{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -100,7 +100,7 @@ func main() {
 				// explicitly skip variadic parameters
 			// Pointer to
 			case p.Kind() == reflect.Ptr:
-				functionCall += "obj *goja.Object,"
+				functionCall += "obj *sobek.Object,"
 				inputType = strings.ReplaceAll(p.String(), "*", "")
 				innerFunctionCall += "in, "
 			}

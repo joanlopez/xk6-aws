@@ -4,7 +4,7 @@ package aws
 import (
 	"context"
 
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -13,7 +13,7 @@ type S3Client struct {
 	sdk *s3.Client
 }
 
-func (a *AWS) newS3Client(call goja.ConstructorCall) *goja.Object {
+func (a *AWS) newS3Client(call sobek.ConstructorCall) *sobek.Object {
 	awsCfg := a.constructorCallToConfig("S3Client", call)
 
 	sdk := s3.NewFromConfig(awsCfg, func(o *s3.Options) {
@@ -29,9 +29,9 @@ func (a *AWS) newS3Client(call goja.ConstructorCall) *goja.Object {
 }
 
 
-func (c *S3Client) ListBuckets(obj *goja.Object,) goja.Value {
+func (c *S3Client) ListBuckets(obj *sobek.Object,) sobek.Value {
 	in := &s3.ListBucketsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 
@@ -43,9 +43,9 @@ func (c *S3Client) ListBuckets(obj *goja.Object,) goja.Value {
 	return c.vu.Runtime().ToValue(out)
 }
 
-func (c *S3Client) ListObjects(obj *goja.Object,) goja.Value {
+func (c *S3Client) ListObjects(obj *sobek.Object,) sobek.Value {
 	in := &s3.ListObjectsInput{}
-	if err := fromGojaObject(c.vu.Runtime(), obj, in); err != nil {
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
 		panic(err)
 	}
 

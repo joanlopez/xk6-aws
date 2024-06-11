@@ -7,12 +7,12 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 )
 
-// Populates the given struct [to] from a *goja.Object.
-func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
-	if obj == nil || goja.IsUndefined(obj) || goja.IsNull(obj) {
+// Populates the given struct [to] from a *sobek.Object.
+func fromSobekObject(rt *sobek.Runtime, obj *sobek.Object, to any) error {
+	if obj == nil || sobek.IsUndefined(obj) || sobek.IsNull(obj) {
 		return nil
 	}
 
@@ -36,9 +36,9 @@ func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
 		fieldType := structType.Field(i)
 		fieldName := pascalToSnake(fieldType.Name)
 
-		// Get the corresponding JavaScript value from the goja object
+		// Get the corresponding JavaScript value from the sobek object
 		jsValue := obj.Get(fieldName)
-		if jsValue == nil || goja.IsUndefined(jsValue) || goja.IsNull(jsValue) {
+		if jsValue == nil || sobek.IsUndefined(jsValue) || sobek.IsNull(jsValue) {
 			continue
 		}
 
@@ -52,7 +52,7 @@ func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
 				if field.IsNil() {
 					field.Set(reflect.New(elemType))
 				}
-				if err := fromGojaObject(rt, jsValue.ToObject(rt), field.Interface()); err != nil {
+				if err := fromSobekObject(rt, jsValue.ToObject(rt), field.Interface()); err != nil {
 					return err
 				}
 			// Handle pointer types to basic types like *string, *int32
@@ -83,7 +83,7 @@ func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
 					innerElemType := elemType.Elem()
 					switch innerElemType.Kind() {
 					case reflect.Struct:
-						if err := fromGojaObject(rt, jsElem.ToObject(rt), elem.Addr().Interface()); err != nil {
+						if err := fromSobekObject(rt, jsElem.ToObject(rt), elem.Addr().Interface()); err != nil {
 							return err
 						}
 					case reflect.String:
@@ -99,7 +99,7 @@ func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
 						elem.Set(reflect.ValueOf(&boolVal))
 					}
 				case reflect.Struct:
-					if err := fromGojaObject(rt, jsElem.ToObject(rt), elem.Addr().Interface()); err != nil {
+					if err := fromSobekObject(rt, jsElem.ToObject(rt), elem.Addr().Interface()); err != nil {
 						return err
 					}
 				case reflect.String:
@@ -120,7 +120,7 @@ func fromGojaObject(rt *goja.Runtime, obj *goja.Object, to any) error {
 			field.Set(slice)
 		case reflect.Struct:
 			// Direct conversion for specific struct types, possibly using custom converters
-			if err := fromGojaObject(rt, jsValue.ToObject(rt), field.Addr().Interface()); err != nil {
+			if err := fromSobekObject(rt, jsValue.ToObject(rt), field.Addr().Interface()); err != nil {
 				return err
 			}
 		case reflect.String:
@@ -157,7 +157,7 @@ func pascalToSnake(s string) string {
 	return snakeCase.String()
 }
 
-// isObject determines whether the given [goja.Value] is a [goja.Object] or not.
-func isObject(val goja.Value) bool {
+// isObject determines whether the given [sobek.Value] is a [sobek.Object] or not.
+func isObject(val sobek.Value) bool {
 	return val != nil && val.ExportType() != nil && val.ExportType().Kind() == reflect.Map
 }
