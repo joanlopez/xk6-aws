@@ -40,7 +40,12 @@ func (c *S3Client) ListBuckets(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	return c.vu.Runtime().ToValue(out)
+	val, err := toSobekObject(c.vu.Runtime(), out)
+	if err != nil {
+		panic(err)
+	}
+
+	return val
 }
 
 func (c *S3Client) ListObjects(obj *sobek.Object,) sobek.Value {
@@ -54,6 +59,11 @@ func (c *S3Client) ListObjects(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	return c.vu.Runtime().ToValue(out)
+	val, err := toSobekObject(c.vu.Runtime(), out)
+	if err != nil {
+		panic(err)
+	}
+
+	return val
 }
 

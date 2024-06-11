@@ -2,6 +2,8 @@ package aws
 
 import (
 	"errors"
+	"fmt"
+	"io"
 	"reflect"
 	"strconv"
 	"strings"
@@ -139,6 +141,138 @@ func fromSobekObject(rt *sobek.Runtime, obj *sobek.Object, to any) error {
 	}
 
 	return nil
+}
+
+// Translates the given struct [from] to a [sobek.Value].
+func toSobekObject(rt *sobek.Runtime, from any) (val sobek.Value, err error) {
+	rv := reflect.ValueOf(from)
+	if rv.Kind() == reflect.Ptr {
+		if rv.IsNil() {
+			return sobek.Null(), nil
+		}
+		rv = rv.Elem()
+	}
+
+	// Validate that 'from' is a struct or a pointer to a struct.
+	if rv.Kind() != reflect.Struct {
+		return nil, errors.New("[from] parameter must be a struct or a pointer to a struct")
+	}
+
+	// Get the struct value and type.
+	structType := rv.Type()
+
+	// Create a new *sobek.Object.
+	obj := rt.NewObject()
+
+	// Iterate over the fields of the struct.
+	for i := 0; i < rv.NumField(); i++ {
+		field := rv.Field(i)
+		fieldType := structType.Field(i)
+		fieldName := pascalToSnake(fieldType.Name)
+
+		// Skip unexported fields.
+		if !field.CanInterface() {
+			continue
+		}
+
+		// Depending on the field type, we need to convert the Go value to a sobek.Value.
+		var jsValue sobek.Value
+
+		switch field.Kind() {
+		case reflect.Ptr:
+			if field.IsNil() {
+				jsValue = sobek.Null()
+				break
+			}
+
+			elem := field.Elem()
+			switch elem.Kind() {
+			case reflect.Struct:
+				jsValue, err = toSobekObject(rt, elem.Addr().Interface())
+			case reflect.String:
+				jsValue = rt.ToValue(elem.String())
+			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+				jsValue = rt.ToValue(elem.Int())
+			case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+				jsValue = rt.ToValue(elem.Uint())
+			case reflect.Float32, reflect.Float64:
+				jsValue = rt.ToValue(elem.Float())
+			case reflect.Bool:
+				jsValue = rt.ToValue(elem.Bool())
+			default:
+				err = fmt.Errorf("unsupported field type: %s", elem.Kind())
+			}
+
+		case reflect.Slice:
+			length := field.Len()
+			elems := make([]interface{}, length)
+			for j := 0; j < length; j++ {
+				elem := field.Index(j)
+				var elemVal sobek.Value
+				switch elem.Kind() {
+				case reflect.Ptr:
+					elemVal, err = toSobekObject(rt, elem.Interface())
+				case reflect.Struct:
+					elemVal, err = toSobekObject(rt, elem.Interface())
+				case reflect.String:
+					elemVal = rt.ToValue(elem.String())
+				case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+					elemVal = rt.ToValue(elem.Int())
+				case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+					elemVal = rt.ToValue(elem.Uint())
+				case reflect.Float32, reflect.Float64:
+					elemVal = rt.ToValue(elem.Float())
+				case reflect.Bool:
+					elemVal = rt.ToValue(elem.Bool())
+				default:
+					err = fmt.Errorf("unsupported field type: %s", elem.Kind())
+				}
+
+				// If there was any error while parsing the field,
+				// we early stop the array population.
+				if err != nil {
+					break
+				}
+
+				elems[j] = elemVal
+			}
+
+			jsValue = rt.NewArray(elems...)
+
+		case reflect.Struct:
+			if fieldType.Type == reflect.TypeOf((*io.ReadCloser)(nil)).Elem() {
+				// Custom logic for io.ReadCloser.
+				// jsValue = handleReadCloser(rt, field.Interface().(io.ReadCloser)).
+			} else {
+				jsValue, err = toSobekObject(rt, field.Addr().Interface())
+			}
+		case reflect.String:
+			jsValue = rt.ToValue(field.String())
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+			jsValue = rt.ToValue(field.Int())
+		case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+		case reflect.Float32, reflect.Float64:
+			jsValue = rt.ToValue(field.Float())
+		case reflect.Bool:
+			jsValue = rt.ToValue(field.Bool())
+		default:
+			jsValue = rt.ToValue(field.Interface())
+		}
+
+		// If there was any error while parsing the field,
+		// we early stop and return the error.
+		if err != nil {
+			return nil, err
+		}
+
+		// The same if there is any error setting the field.
+		if err := obj.Set(fieldName, jsValue); err != nil {
+			return nil, err
+		}
+	}
+
+	val = rt.ToValue(obj)
+	return val, err
 }
 
 // pascalToSnake converts a PascalCase string to snake_case.

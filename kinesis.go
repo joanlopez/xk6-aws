@@ -53,7 +53,12 @@ func (c *KinesisClient) {{ .Name }}({{ .FunctionCall }}) sobek.Value {
 		panic(err)
 	}
 
-	return c.vu.Runtime().ToValue(out)
+	val, err := toSobekObject(c.vu.Runtime(), out)
+	if err != nil {
+		panic(err)
+	}
+
+	return val
 }
 {{ end }}
 `
