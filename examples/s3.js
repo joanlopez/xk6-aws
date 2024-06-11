@@ -13,7 +13,7 @@ export const options = {
 	},
 };
 
-export default function () {
+export default async function () {
 	const s3 = new S3Client(config);
 
 	const {buckets} = s3.listBuckets();
@@ -35,6 +35,14 @@ export default function () {
 	check(b2Objects, {
 			'it must return one object': (b2Objects) => b2Objects.length === 1,
 			'file1.txt must be in the list': (b2Objects) => b2Objects.some(obj => obj.key.normalize() === "file2.txt")
+		}
+	);
+
+	const {body} = s3.getObject({bucket: "bucket1", key: "file1.txt"})
+	const reader = body.getReader();
+	const {value} = await reader.read();
+	check(value, {
+			'file1.txt contents are the expected ones': (value) => value === 'Hello, World',
 		}
 	);
 }

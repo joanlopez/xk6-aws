@@ -55,7 +55,7 @@ func (c *S3Client) {{ .Name }}({{ .FunctionCall }}) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -68,6 +68,7 @@ func (c *S3Client) {{ .Name }}({{ .FunctionCall }}) sobek.Value {
 type S3Client interface {
 	ListBuckets(ctx context.Context, params *s3.ListBucketsInput, optFns ...func(*s3.Options)) (*s3.ListBucketsOutput, error)
 	ListObjects(ctx context.Context, params *s3.ListObjectsInput, optFns ...func(*s3.Options)) (*s3.ListObjectsOutput, error)
+	GetObject(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error)
 }
 
 func main() {

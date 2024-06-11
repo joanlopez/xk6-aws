@@ -29,6 +29,25 @@ func (a *AWS) newS3Client(call sobek.ConstructorCall) *sobek.Object {
 }
 
 
+func (c *S3Client) GetObject(obj *sobek.Object,) sobek.Value {
+	in := &s3.GetObjectInput{}
+	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
+		panic(err)
+	}
+
+	out, err := c.sdk.GetObject(context.Background(), in, )
+    if err != nil {
+		panic(err)
+	}
+
+	val, err := toSobekObject(c.vu, out)
+	if err != nil {
+		panic(err)
+	}
+
+	return val
+}
+
 func (c *S3Client) ListBuckets(obj *sobek.Object,) sobek.Value {
 	in := &s3.ListBucketsInput{}
 	if err := fromSobekObject(c.vu.Runtime(), obj, in); err != nil {
@@ -40,7 +59,7 @@ func (c *S3Client) ListBuckets(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -59,7 +78,7 @@ func (c *S3Client) ListObjects(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}

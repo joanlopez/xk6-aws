@@ -53,7 +53,7 @@ func (c *EventBridgeClient) {{ .Name }}({{ .FunctionCall }}) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}

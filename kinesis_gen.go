@@ -38,7 +38,7 @@ func (c *KinesisClient) AddTagsToStream(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -57,7 +57,7 @@ func (c *KinesisClient) CreateStream(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -76,7 +76,7 @@ func (c *KinesisClient) DecreaseStreamRetentionPeriod(obj *sobek.Object,) sobek.
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -95,7 +95,7 @@ func (c *KinesisClient) DeleteResourcePolicy(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -114,7 +114,7 @@ func (c *KinesisClient) DeleteStream(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -133,7 +133,7 @@ func (c *KinesisClient) DeregisterStreamConsumer(obj *sobek.Object,) sobek.Value
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -152,7 +152,7 @@ func (c *KinesisClient) DescribeLimits(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -171,7 +171,7 @@ func (c *KinesisClient) DescribeStream(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -190,7 +190,7 @@ func (c *KinesisClient) DescribeStreamConsumer(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -209,7 +209,7 @@ func (c *KinesisClient) DescribeStreamSummary(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -228,7 +228,7 @@ func (c *KinesisClient) DisableEnhancedMonitoring(obj *sobek.Object,) sobek.Valu
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -247,7 +247,7 @@ func (c *KinesisClient) EnableEnhancedMonitoring(obj *sobek.Object,) sobek.Value
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -266,7 +266,7 @@ func (c *KinesisClient) GetRecords(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -285,7 +285,7 @@ func (c *KinesisClient) GetResourcePolicy(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -304,7 +304,7 @@ func (c *KinesisClient) GetShardIterator(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -323,7 +323,7 @@ func (c *KinesisClient) IncreaseStreamRetentionPeriod(obj *sobek.Object,) sobek.
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -342,7 +342,7 @@ func (c *KinesisClient) ListShards(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -361,7 +361,7 @@ func (c *KinesisClient) ListStreamConsumers(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -380,7 +380,7 @@ func (c *KinesisClient) ListStreams(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -399,7 +399,7 @@ func (c *KinesisClient) ListTagsForStream(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -418,7 +418,7 @@ func (c *KinesisClient) MergeShards(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -437,7 +437,7 @@ func (c *KinesisClient) PutRecord(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -456,7 +456,7 @@ func (c *KinesisClient) PutRecords(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -475,7 +475,7 @@ func (c *KinesisClient) PutResourcePolicy(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -494,7 +494,7 @@ func (c *KinesisClient) RegisterStreamConsumer(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -513,7 +513,7 @@ func (c *KinesisClient) RemoveTagsFromStream(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -532,7 +532,7 @@ func (c *KinesisClient) SplitShard(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -551,7 +551,7 @@ func (c *KinesisClient) StartStreamEncryption(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -570,7 +570,7 @@ func (c *KinesisClient) StopStreamEncryption(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -589,7 +589,7 @@ func (c *KinesisClient) SubscribeToShard(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -608,7 +608,7 @@ func (c *KinesisClient) UpdateShardCount(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -627,7 +627,7 @@ func (c *KinesisClient) UpdateStreamMode(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}

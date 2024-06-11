@@ -38,7 +38,7 @@ func (c *EventBridgeClient) ActivateEventSource(obj *sobek.Object,) sobek.Value 
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -57,7 +57,7 @@ func (c *EventBridgeClient) CancelReplay(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -76,7 +76,7 @@ func (c *EventBridgeClient) CreateApiDestination(obj *sobek.Object,) sobek.Value
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -95,7 +95,7 @@ func (c *EventBridgeClient) CreateArchive(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -114,7 +114,7 @@ func (c *EventBridgeClient) CreateConnection(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -133,7 +133,7 @@ func (c *EventBridgeClient) CreateEndpoint(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -152,7 +152,7 @@ func (c *EventBridgeClient) CreateEventBus(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -171,7 +171,7 @@ func (c *EventBridgeClient) CreatePartnerEventSource(obj *sobek.Object,) sobek.V
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -190,7 +190,7 @@ func (c *EventBridgeClient) DeactivateEventSource(obj *sobek.Object,) sobek.Valu
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -209,7 +209,7 @@ func (c *EventBridgeClient) DeauthorizeConnection(obj *sobek.Object,) sobek.Valu
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -228,7 +228,7 @@ func (c *EventBridgeClient) DeleteApiDestination(obj *sobek.Object,) sobek.Value
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -247,7 +247,7 @@ func (c *EventBridgeClient) DeleteArchive(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -266,7 +266,7 @@ func (c *EventBridgeClient) DeleteConnection(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -285,7 +285,7 @@ func (c *EventBridgeClient) DeleteEndpoint(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -304,7 +304,7 @@ func (c *EventBridgeClient) DeleteEventBus(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -323,7 +323,7 @@ func (c *EventBridgeClient) DeletePartnerEventSource(obj *sobek.Object,) sobek.V
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -342,7 +342,7 @@ func (c *EventBridgeClient) DeleteRule(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -361,7 +361,7 @@ func (c *EventBridgeClient) DescribeApiDestination(obj *sobek.Object,) sobek.Val
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -380,7 +380,7 @@ func (c *EventBridgeClient) DescribeArchive(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -399,7 +399,7 @@ func (c *EventBridgeClient) DescribeConnection(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -418,7 +418,7 @@ func (c *EventBridgeClient) DescribeEndpoint(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -437,7 +437,7 @@ func (c *EventBridgeClient) DescribeEventBus(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -456,7 +456,7 @@ func (c *EventBridgeClient) DescribeEventSource(obj *sobek.Object,) sobek.Value 
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -475,7 +475,7 @@ func (c *EventBridgeClient) DescribePartnerEventSource(obj *sobek.Object,) sobek
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -494,7 +494,7 @@ func (c *EventBridgeClient) DescribeReplay(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -513,7 +513,7 @@ func (c *EventBridgeClient) DescribeRule(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -532,7 +532,7 @@ func (c *EventBridgeClient) DisableRule(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -551,7 +551,7 @@ func (c *EventBridgeClient) EnableRule(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -570,7 +570,7 @@ func (c *EventBridgeClient) ListApiDestinations(obj *sobek.Object,) sobek.Value 
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -589,7 +589,7 @@ func (c *EventBridgeClient) ListArchives(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -608,7 +608,7 @@ func (c *EventBridgeClient) ListConnections(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -627,7 +627,7 @@ func (c *EventBridgeClient) ListEndpoints(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -646,7 +646,7 @@ func (c *EventBridgeClient) ListEventBuses(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -665,7 +665,7 @@ func (c *EventBridgeClient) ListEventSources(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -684,7 +684,7 @@ func (c *EventBridgeClient) ListPartnerEventSourceAccounts(obj *sobek.Object,) s
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -703,7 +703,7 @@ func (c *EventBridgeClient) ListPartnerEventSources(obj *sobek.Object,) sobek.Va
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -722,7 +722,7 @@ func (c *EventBridgeClient) ListReplays(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -741,7 +741,7 @@ func (c *EventBridgeClient) ListRuleNamesByTarget(obj *sobek.Object,) sobek.Valu
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -760,7 +760,7 @@ func (c *EventBridgeClient) ListRules(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -779,7 +779,7 @@ func (c *EventBridgeClient) ListTagsForResource(obj *sobek.Object,) sobek.Value 
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -798,7 +798,7 @@ func (c *EventBridgeClient) ListTargetsByRule(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -817,7 +817,7 @@ func (c *EventBridgeClient) PutEvents(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -836,7 +836,7 @@ func (c *EventBridgeClient) PutPartnerEvents(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -855,7 +855,7 @@ func (c *EventBridgeClient) PutPermission(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -874,7 +874,7 @@ func (c *EventBridgeClient) PutRule(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -893,7 +893,7 @@ func (c *EventBridgeClient) PutTargets(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -912,7 +912,7 @@ func (c *EventBridgeClient) RemovePermission(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -931,7 +931,7 @@ func (c *EventBridgeClient) RemoveTargets(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -950,7 +950,7 @@ func (c *EventBridgeClient) StartReplay(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -969,7 +969,7 @@ func (c *EventBridgeClient) TagResource(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -988,7 +988,7 @@ func (c *EventBridgeClient) TestEventPattern(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -1007,7 +1007,7 @@ func (c *EventBridgeClient) UntagResource(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -1026,7 +1026,7 @@ func (c *EventBridgeClient) UpdateApiDestination(obj *sobek.Object,) sobek.Value
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -1045,7 +1045,7 @@ func (c *EventBridgeClient) UpdateArchive(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -1064,7 +1064,7 @@ func (c *EventBridgeClient) UpdateConnection(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -1083,7 +1083,7 @@ func (c *EventBridgeClient) UpdateEndpoint(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}
@@ -1102,7 +1102,7 @@ func (c *EventBridgeClient) UpdateEventBus(obj *sobek.Object,) sobek.Value {
 		panic(err)
 	}
 
-	val, err := toSobekObject(c.vu.Runtime(), out)
+	val, err := toSobekObject(c.vu, out)
 	if err != nil {
 		panic(err)
 	}

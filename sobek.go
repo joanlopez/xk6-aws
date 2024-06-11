@@ -10,6 +10,8 @@ import (
 	"unicode"
 
 	"github.com/grafana/sobek"
+	"go.k6.io/k6/js/modules"
+	"go.k6.io/k6/js/modules/k6/experimental/streams"
 )
 
 // Populates the given struct [to] from a *sobek.Object.
@@ -144,7 +146,8 @@ func fromSobekObject(rt *sobek.Runtime, obj *sobek.Object, to any) error {
 }
 
 // Translates the given struct [from] to a [sobek.Value].
-func toSobekObject(rt *sobek.Runtime, from any) (val sobek.Value, err error) {
+func toSobekObject(vu modules.VU, from any) (val sobek.Value, err error) {
+	rt := vu.Runtime()
 	rv := reflect.ValueOf(from)
 	if rv.Kind() == reflect.Ptr {
 		if rv.IsNil() {
@@ -188,7 +191,7 @@ func toSobekObject(rt *sobek.Runtime, from any) (val sobek.Value, err error) {
 			elem := field.Elem()
 			switch elem.Kind() {
 			case reflect.Struct:
-				jsValue, err = toSobekObject(rt, elem.Addr().Interface())
+				jsValue, err = toSobekObject(vu, elem.Addr().Interface())
 			case reflect.String:
 				jsValue = rt.ToValue(elem.String())
 			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
@@ -211,9 +214,9 @@ func toSobekObject(rt *sobek.Runtime, from any) (val sobek.Value, err error) {
 				var elemVal sobek.Value
 				switch elem.Kind() {
 				case reflect.Ptr:
-					elemVal, err = toSobekObject(rt, elem.Interface())
+					elemVal, err = toSobekObject(vu, elem.Interface())
 				case reflect.Struct:
-					elemVal, err = toSobekObject(rt, elem.Interface())
+					elemVal, err = toSobekObject(vu, elem.Interface())
 				case reflect.String:
 					elemVal = rt.ToValue(elem.String())
 				case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
@@ -239,13 +242,12 @@ func toSobekObject(rt *sobek.Runtime, from any) (val sobek.Value, err error) {
 
 			jsValue = rt.NewArray(elems...)
 
-		case reflect.Struct:
+		case reflect.Interface:
 			if fieldType.Type == reflect.TypeOf((*io.ReadCloser)(nil)).Elem() {
-				// Custom logic for io.ReadCloser.
-				// jsValue = handleReadCloser(rt, field.Interface().(io.ReadCloser)).
-			} else {
-				jsValue, err = toSobekObject(rt, field.Addr().Interface())
+				jsValue = rt.ToValue(streams.NewReadableStreamFromReader(vu, field.Interface().(io.ReadCloser)))
 			}
+		case reflect.Struct:
+			jsValue, err = toSobekObject(vu, field.Addr().Interface())
 		case reflect.String:
 			jsValue = rt.ToValue(field.String())
 		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
